@@ -62,3 +62,16 @@ export const updateUser = async (
     return res.status(500).json({ message: "Internal server error" });
   }
 };
+
+export const getUser = async (req: express.Request, res: express.Response) => {
+  try {
+    const { id } = req.params;
+
+    const user = await getUserById(id);
+
+    return res.status(200).json({ user }).end();
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};

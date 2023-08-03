@@ -75,3 +75,31 @@ export const getUser = async (req: express.Request, res: express.Response) => {
     return res.status(500).json({ message: "Internal server error" });
   }
 };
+
+export const addAdmin = async (req: express.Request, res: express.Response) => {
+  try {
+    const { id } = req.params;
+
+    const user = await getUserById(id);
+
+    if (!user || user === null || user === undefined) {
+      return res.status(400).json({ message: "User not found" });
+    }
+
+    if (user.role === "admin") {
+      return res.status(400).json({ message: "User is already an admin" });
+    }
+
+    user.role = "admin";
+
+    await user.save();
+
+    return res
+      .status(200)
+      .json({ message: "User updated successfully", user: user })
+      .end();
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};

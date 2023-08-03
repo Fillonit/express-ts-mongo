@@ -1,6 +1,6 @@
 import express from "express";
 
-import { getUsersByEmail, createUser } from "../db/users";
+import { getUsersByEmail, createUser, getUserById } from "../db/users";
 import { authentication, random } from "../helpers";
 
 export const login = async (req: express.Request, res: express.Response) => {
@@ -72,6 +72,25 @@ export const register = async (req: express.Request, res: express.Response) => {
     });
 
     return res.status(201).json({ user }).end();
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+export const logout = async (req: express.Request, res: express.Response) => {
+  try {
+    const { id } = req.params;
+
+    const user = await getUserById(id);
+
+    user.authentication.sessionToken = "";
+
+    await user.save();
+
+    res.clearCookie("sessionToken");
+
+    return res.status(200).json({ message: "User logged out" }).end();
   } catch (error) {
     console.log(error);
     return res.status(500).json({ message: "Internal server error" });

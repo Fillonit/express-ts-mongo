@@ -40,3 +40,15 @@ mongoose
   .catch((err) => console.log(err));
 
 app.use("/", router());
+
+app.get("/", (req: express.Request, res: express.Response) => {
+  res.status(200).json({
+    "vue-api": {
+      _desc: "This is the api for my full-stack vue project.",
+      _repo: "https://github.com/Fillonit/vue-api",
+      _author: "Fillonit",
+      _version: "1.0.0",
+      _license: "MIT",
+    },
+  });
+});

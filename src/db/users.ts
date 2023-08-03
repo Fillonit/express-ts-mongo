@@ -8,6 +8,7 @@ const UserSchema = new mongoose.Schema({
     salt: { type: String, selected: false },
     sessionToken: { type: String, selected: false },
   },
+  role: { type: String, default: "user" },
 });
 
 export const UserModel = mongoose.model("User", UserSchema);
@@ -28,3 +29,11 @@ export const updateUser = (id: string, values: Record<string, any>) =>
 
 export const deleteUserById = (id: string) =>
   UserModel.findOneAndDelete({ _id: id });
+
+export const getUserRole = (id: string) =>
+  UserModel.findById(id).select("role");
+
+export const makeAdmin = (id: string) =>
+  UserModel.findByIdAndUpdate(id, { role: "admin" }).then((user) =>
+    user.toObject()
+  );

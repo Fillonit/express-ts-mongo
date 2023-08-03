@@ -7,6 +7,8 @@ import cors from "cors";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 
+import router from "./router";
+
 dotenv.config();
 
 const { PORT, MONGO_URL, NODE_ENV } = process.env;
@@ -36,3 +38,5 @@ mongoose
   .connect(MONGO_URL)
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.log(err));
+
+app.use("/", router());

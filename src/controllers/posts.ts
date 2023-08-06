@@ -40,7 +40,7 @@ export const createNewPost = async (
       return res.status(401).json({ message: "Unauthorized" });
     }
 
-    const { title, content } = req.body;
+    const { title, content, imageURL } = req.body;
 
     if (!title || !content) {
       return res
@@ -53,6 +53,7 @@ export const createNewPost = async (
       content,
       authorId: user._id,
       authorUsername: user.username,
+      imageURL: imageURL ?? "",
     });
 
     return res

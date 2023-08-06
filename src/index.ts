@@ -52,3 +52,8 @@ app.get("/", (req: express.Request, res: express.Response) => {
     },
   });
 });
+
+import { notFound, errorHandler } from "./middlewares";
+
+app.use(notFound);
+app.use(errorHandler);

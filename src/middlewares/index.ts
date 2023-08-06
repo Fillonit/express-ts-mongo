@@ -104,3 +104,29 @@ export const isAdmin = async (
     return res.status(500).send({ error: error.message });
   }
 };
+
+// Error handling
+export const notFound = (
+  req: express.Request,
+  res: express.Response,
+  next: express.NextFunction
+) => {
+  const error = new Error(`Not found - ${req.originalUrl}`);
+  res.status(404);
+  next(error);
+};
+
+export const errorHandler = (
+  error: any,
+  req: express.Request,
+  res: express.Response,
+  next: express.NextFunction
+) => {
+  const statusCode =
+    res.statusCode === 200 || res.statusCode === 201 ? 500 : res.statusCode;
+  res.status(statusCode);
+  res.json({
+    message: error.message,
+    stack: process.env.NODE_ENV === "production" ? "🥞" : error.stack,
+  });
+};

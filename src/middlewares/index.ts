@@ -46,11 +46,16 @@ export const isOwner = async (
     const { id } = req.params;
 
     if (!identity) {
-      return res.status(401).json({ message: "Unauthorized" });
+      return res
+        .status(401)
+        .json({ message: "Unauthorized, Not Authenticated!" });
     }
 
-    if (identity.toString() !== id) {
-      return res.status(401).json({ message: "Unauthorized" });
+    if (
+      identity.toString() !== id &&
+      identity.toString() !== process.env.APP_OWNER_ID
+    ) {
+      return res.status(401).json({ message: "Unauthorized, Not Authorized!" });
     }
 
     return next();

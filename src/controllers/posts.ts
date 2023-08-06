@@ -91,7 +91,8 @@ export const updatePostById = async (
 ) => {
   try {
     const { id } = req.params;
-    const { title, content } = req.body;
+    const { title, content, imageURL } = req.body;
+    // console.log(req.body);
 
     if (!title || !content) {
       return res
@@ -102,6 +103,7 @@ export const updatePostById = async (
     const post = await updatePost(id, {
       title,
       content,
+      imageURL: imageURL ?? "",
       updatedAt: new Date(),
     });
 

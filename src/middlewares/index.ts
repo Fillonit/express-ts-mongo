@@ -11,16 +11,20 @@ export const isAuthenticated = async (
   next: express.NextFunction
 ) => {
   try {
-    const sessionToken = req.cookies.sessionToken;
+    const sessionToken = req.headers.authorization as string;
 
     if (!sessionToken) {
-      return res.status(401).json({ message: "Unauthorized" });
+      return res
+        .status(401)
+        .json({ message: "Unauthorized, Session Token Not Provided!" });
     }
 
     const user = await getUserBySessionToken(sessionToken);
 
     if (!user) {
-      return res.status(401).json({ message: "Unauthorized" });
+      return res
+        .status(401)
+        .json({ message: "Unauthorized, Session Token Invalid!" });
     }
 
     merge(req, { identity: user });
@@ -66,13 +70,17 @@ export const isPostOwner = async (
     const { id } = req.params;
 
     if (!identity) {
-      return res.status(401).json({ message: "Unauthorized" });
+      return res
+        .status(401)
+        .json({ message: "Unauthorized, Not Authenticated!" });
     }
 
     const authorId = await getPostAuthorId(id);
 
     if (identity.toString() !== authorId.authorId.toString()) {
-      return res.status(401).json({ message: "Unauthorized" });
+      return res
+        .status(401)
+        .json({ message: "Unauthorized, Not Post Author!" });
     }
 
     return next();
@@ -129,4 +137,27 @@ export const errorHandler = (
     message: error.message,
     stack: process.env.NODE_ENV === "production" ? "🥞" : error.stack,
   });
+};
+
+export const isAppOwner = async (
+  req: express.Request,
+  res: express.Response,
+  next: express.NextFunction
+) => {
+  try {
+    const identity = get(req, "identity._id") as string;
+
+    if (!identity) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+
+    if (identity.toString() !== process.env.APP_OWNER_ID) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+
+    return next();
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send({ error: error.message });
+  }
 };

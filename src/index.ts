@@ -28,8 +28,8 @@ app.use(
 
 const server = http.createServer(app);
 
-server.listen(8080, () => {
-  console.log("Server is running on http://localhost:8080/");
+server.listen(PORT || 8080, () => {
+  console.log(`Server is running on http://localhost:${PORT}/`);
 });
 
 mongoose.Promise = global.Promise;

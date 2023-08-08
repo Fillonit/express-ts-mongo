@@ -1,6 +1,6 @@
 {
   "name": "vue-api",
-  "version": "1.0.0",
+  "version": "0.1.7",
   "description": "This is the API for the VUE project. It is a REST API built with Node.js, Express.js, and MongoDB.",
   "main": "index.js",
   "scripts": {

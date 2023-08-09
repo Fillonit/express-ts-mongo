@@ -21,3 +21,5 @@ export const getMessagesByAuthorId = (authorId: string) =>
 
 export const getMostRecentMessages = (limit: number) =>
   MessageModel.find().sort({ createdAt: -1 }).limit(limit);
+
+export const getTotalMessages = () => MessageModel.countDocuments();

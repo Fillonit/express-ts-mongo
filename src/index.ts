@@ -22,36 +22,36 @@ app.use(cookieParser());
 app.use(compression());
 
 app.use(
-  cors({
-    credentials: true,
-  })
+	cors({
+		credentials: true,
+	})
 );
 
 const server = http.createServer(app);
 
 server.listen(PORT || 8080, () => {
-  console.log(`Server is running on http://localhost:${PORT}/`);
+	console.log(`Server is running on http://localhost:${PORT}/`);
 });
 
 mongoose.Promise = global.Promise;
 
 mongoose
-  .connect(MONGO_URL)
-  .then(() => console.log("MongoDB connected"))
-  .catch((err) => console.log(err));
+	.connect(MONGO_URL)
+	.then(() => console.log("MongoDB connected"))
+	.catch((err) => console.log(err));
 
 app.use("/", router());
 
 app.get("/", (req: express.Request, res: express.Response) => {
-  res.status(200).json({
-    "vue-api": {
-      _desc: pkg.description,
-      _repo: pkg.repo,
-      _author: pkg.author,
-      _version: pkg.version,
-      _license: pkg.license,
-    },
-  });
+	res.status(200).json({
+		"vue-api": {
+			_desc: pkg.description,
+			_repo: pkg.repo,
+			_author: pkg.author,
+			_version: pkg.version,
+			_license: pkg.license,
+		},
+	});
 });
 
 import { notFound, errorHandler } from "./middlewares";

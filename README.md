@@ -16,3 +16,39 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Authors
 - [**Fillonit Ibishi**](https://github.com/Fillonit)
+
+# Installation
+## Clone
+Clone this repository to your local machine using 
+```shell
+$ git clone
+```
+## Setup
+> Install npm packages
+```shell
+$ npm install
+```
+> Create a .env file in the root directory and add the following
+```shell
+NODE_ENV=
+MONGO_USERNAME=
+MONGO_PASSWORD=
+MONGO_URL=
+SECRET=
+APP_OWNER_ID=
+RIOT_API_KEY=
+PORT=
+```
+
+> Run the server
+```shell
+$ npm start
+```
+> Run the server with nodemon
+```shell
+$ npm run dev
+```
+> Run the tests
+```shell
+$ npm test
+```

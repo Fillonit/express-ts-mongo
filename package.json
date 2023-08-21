@@ -1,8 +1,8 @@
 {
-	"name": "vue-api",
+	"name": "express-ts-mongo",
 	"version": "0.1.7",
 	"description": "This is the API for the VUE project. It is a REST API built with Node.js, Express.js, and MongoDB.",
-	"repo": "https://github.com/Fillonit/vue-api",
+	"repo": "https://github.com/Fillonit/express-ts-mongo",
 	"main": "index.js",
 	"scripts": {
 		"build": "tsc",

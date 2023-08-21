@@ -44,7 +44,7 @@ app.use("/", router());
 
 app.get("/", (req: express.Request, res: express.Response) => {
 	res.status(200).json({
-		"vue-api": {
+		"express-ts-mongo": {
 			_desc: pkg.description,
 			_repo: pkg.repo,
 			_author: pkg.author,

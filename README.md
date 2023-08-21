@@ -1,5 +1,5 @@
-# VUE API
-This is the API for the VUE project. It is a REST API built with Node.js, Express.js, and MongoDB.
+# express typescript starter with mongodb
+This is the API starter. It is a REST API built with Node.js, Express.js, and MongoDB.
 
 ## Getting Started
 To get started, clone this repository and run `npm install` to install the dependencies. Then, run `npm start` to start the server. The server will be running on port **8080**.

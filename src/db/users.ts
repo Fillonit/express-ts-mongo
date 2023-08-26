@@ -9,6 +9,14 @@ const UserSchema = new mongoose.Schema({
 		sessionToken: { type: String, selected: false },
 	},
 	role: { type: String, default: "user" },
+	profile: {
+		firstName: { type: String, required: true, default: "John" },
+		lastName: { type: String, required: true, default: "Doe" },
+		avatar: { type: String, default: "https://i.imgur.com/6VBx3io.png" },
+		bio: { type: String, default: "Hello, World!" },
+	},
+	createdAt: { type: Date, default: Date.now },
+	updatedAt: { type: Date, default: Date.now },
 });
 
 export const UserModel = mongoose.model("User", UserSchema);

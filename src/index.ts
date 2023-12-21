@@ -13,6 +13,7 @@ import router from "./router";
 dotenv.config();
 
 const { PORT, MONGO_URL, NODE_ENV } = process.env;
+import { notFound, errorHandler, logger } from "./middlewares";
 
 const app = express();
 
@@ -40,6 +41,7 @@ mongoose
 	.then(() => console.log("MongoDB connected"))
 	.catch((err) => console.log(err));
 
+app.use(logger);
 app.use("/", router());
 
 app.get("/", (req: express.Request, res: express.Response) => {
@@ -54,7 +56,6 @@ app.get("/", (req: express.Request, res: express.Response) => {
 	});
 });
 
-import { notFound, errorHandler } from "./middlewares";
-
 app.use(notFound);
 app.use(errorHandler);
+app.use(logger);

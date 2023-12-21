@@ -2,8 +2,8 @@ import express from "express";
 import authentication from "./authentication";
 import users from "./users";
 import posts from "./posts";
-import games from "./games";
-import comments from "./comments";
+import messages from "./messages";
+import products from "./products";
 
 const router = express.Router();
 
@@ -11,11 +11,8 @@ export default (): express.Router => {
 	authentication(router);
 	users(router);
 	posts(router);
-	games(router);
-	comments(router);
-	router.get("/test", (req, res) => {
-		res.send("Hello World!");
-	});
+	messages(router);
+	products(router);
 
 	return router;
 };

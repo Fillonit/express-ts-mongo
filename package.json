@@ -6,8 +6,8 @@
 	"main": "index.js",
 	"scripts": {
 		"build": "tsc",
-		"start": "nodemon --no-warnings NODE_NO_WARNINGS=1",
-		"dev": "nodemon --exec ts-node src/index.ts --no-warnings NODE_NO_WARNINGS=1",
+		"start": "nodemon",
+		"dev": "nodemon --exec ts-node src/index.ts",
 		"test": "cross-env NODE_ENV=test jest --testTimeout=5000 --detectOpenHandles"
 	},
 	"keywords": [],
@@ -30,7 +30,6 @@
 	},
 	"dependencies": {
 		"body-parser": "^1.20.2",
-		"boxen": "^7.1.1",
 		"compression": "^1.7.4",
 		"cookie-parser": "^1.4.6",
 		"cors": "^2.8.5",
